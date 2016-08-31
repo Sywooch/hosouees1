@@ -68,7 +68,11 @@ $persona  = PersonaHelper::getPersona();
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <?= Html::img('@web/uploads/'.$persona->ArchivoAdjunto, ['class' => 'user-image', 'alt'=>'Foto de usuario']);?> 
-                        <span class="hidden-xs"><?=Yii::$app->user->identity->username;?></span>
+                        
+                        <span class="hidden-xs">
+                            <?=$persona->NombreCompleto?>
+                            (<b><?=Yii::$app->user->identity->username;?></b>)
+                        </span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -76,7 +80,7 @@ $persona  = PersonaHelper::getPersona();
                             <?= Html::img('@web/uploads/'.$persona->ArchivoAdjunto, ['class' => 'img-circle', 'alt'=>'Foto de usuario']);?> 
 
                             <p>
-                                <?php echo PersonaHelper::getNombrePersona(); ?>
+                                <?php echo $persona->NombreCompleto; ?>
                                 <!--<small>Member since Nov. 2012</small>-->
                             </p>
                         </li>

@@ -61,10 +61,10 @@ text/plain, application/pdf, image/*'],
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
+                     <?=Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Cancelar', ['comunicacion/index', 'idProyecto' => $idProyecto], ['class'=> 'btn btn-danger'])?>
 	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Enviar') : Yii::t('app', 'Actualizar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	    </div>
 	<?php } ?>
 
     <?php ActiveForm::end(); ?>
-    
 </div>

@@ -19,65 +19,77 @@ $asesores = ArrayHelper::map(Persona::find()->where(['EstadoRegistro' => '1'])->
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="proyecto-form">
+<?php $form = ActiveForm::begin([
+'options'=>['enctype'=>'multipart/form-data'] // important
+]); 
+?>
+<div class="row proyecto-form">
 
-    <?php $form = ActiveForm::begin([
-    'options'=>['enctype'=>'multipart/form-data'] // important
-    ]); 
-    
-//    echo $form->field($model, 'NombreAdjunto');
-    
-    // your fileinput widget for single file upload
-    echo $form->field($model, 'image')->widget(FileInput::classname(), [
-        'options'=>['accept'=>'image/*'],
-        'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']]
-    ]);    
-    ?>
+    <div class="col-md-4 col-sm-6">
 
-    <?= $form->field($model, 'NombreProyecto')->textInput(['maxlength' => true]) ?>
-    
-    <?= $form->field($model, 'Ubicacion')->textInput(['maxlength' => true]) ?>  
-    
-    <?php
-        echo $form->field($model, 'FechaIni')->widget(KDatePicker::classname(), [
-           'options' => ['placeholder' => 'Fecho de inicio ...'],
-           'pluginOptions' => [
-               'autoclose'=>true,
-               'format' => 'yyyy/mm/dd'
-           ]
-       ]); 
-        
-        echo $form->field($model, 'FechaFin')->widget(KDatePicker::classname(), [
-           'options' => ['placeholder' => 'Fecho de finalización ...'],
-           'pluginOptions' => [
-               'autoclose'=>true,
-               'format' => 'yyyy/mm/dd'
-           ]
-       ]);        
-    ?>    
-    
-    <?= $form->field($model, 'IdInstitucion')->dropDownList($instituciones, 
-             ['prompt'=>'- Seleccione la institución -', 'id'=>'idInstitucion-id'])->label('Institución') ?>      
+        <?php
+    //    echo $form->field($model, 'NombreAdjunto');
 
-    <?= $form->field($model, 'NumeroPersonas')->textInput()->label('Número de estudiantes requeridos')?>    
-    
-    <?= $form->field($model, 'HorasSolicitadas')->textInput()->label('Total de horas sociales que otorga al estudiante que finaliza') ?>
-    
-    <?= $form->field($model, 'HorasSocialesXhora')->textInput()->label('Cantidad de horas sociales por hora de asitencia') ?>          
+        // your fileinput widget for single file upload
+        echo $form->field($model, 'image')->widget(FileInput::classname(), [
+            'options'=>['accept'=>'image/*'],
+            'pluginOptions'=>['allowedFileExtensions'=>['jpg','gif','png']]
+        ]);    
+        ?>
 
-    <?= $form->field($model, 'IdPersonaAsesor')->dropDownList($asesores, 
-             ['prompt'=>'- Seleccione el asesor del proyecto -', 'id'=>'IdPersonaAsesor-id'])->label('Asesor') ?> 
+        <?= $form->field($model, 'NombreProyecto')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'IdEstadoProyecto')->dropDownList($estadosProyecto, 
-             ['prompt'=>'- Seleccione el estado del proyecto -', 'id'=>'estadoProyecto-id'])->label('Estado del proyecto') ?>     
-    
-    <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
-             ['prompt'=>'- Seleccione el estado del registro-']) ?>
+        <?= $form->field($model, 'Ubicacion')->textInput(['maxlength' => true]) ?>  
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php
+            echo $form->field($model, 'FechaIni')->widget(KDatePicker::classname(), [
+               'options' => ['placeholder' => 'Fecho de inicio ...'],
+               'pluginOptions' => [
+                   'autoclose'=>true,
+                   'format' => 'yyyy/mm/dd'
+               ]
+           ]); 
+        ?>        
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <div class="col-md-4  col-sm-6">
+        <?php    
+            echo $form->field($model, 'FechaFin')->widget(KDatePicker::classname(), [
+               'options' => ['placeholder' => 'Fecho de finalización ...'],
+               'pluginOptions' => [
+                   'autoclose'=>true,
+                   'format' => 'yyyy/mm/dd'
+               ]
+           ]);        
+        ?>    
 
+        <?= $form->field($model, 'IdInstitucion')->dropDownList($instituciones, 
+                 ['prompt'=>'- Seleccione la institución -', 'id'=>'idInstitucion-id'])->label('Institución') ?>      
+
+        <?= $form->field($model, 'NumeroPersonas')->textInput()->label('Número de estudiantes requeridos')?>    
+
+        <?= $form->field($model, 'HorasSolicitadas')->textInput()->label('Total de horas sociales que otorga al estudiante que finaliza') ?>
+    </div>
+    
+    <div class="col-md-4  col-sm-6">
+        <?= $form->field($model, 'HorasSocialesXhora')->textInput()->label('Cantidad de horas sociales por hora de asitencia') ?>          
+
+        <?= $form->field($model, 'IdPersonaAsesor')->dropDownList($asesores, 
+                 ['prompt'=>'- Seleccione el asesor del proyecto -', 'id'=>'IdPersonaAsesor-id'])->label('Asesor') ?> 
+
+        <?= $form->field($model, 'IdEstadoProyecto')->dropDownList($estadosProyecto, 
+                 ['prompt'=>'- Seleccione el estado del proyecto -', 'id'=>'estadoProyecto-id'])->label('Estado del proyecto') ?>     
+
+        <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
+                 ['prompt'=>'- Seleccione el estado del registro-']) ?>
+    </div>    
+    
 </div>
+<div class="row">
+     <div class="form-group  col-md-12">
+        <?=Html::a('<i class="glyphicon glyphicon-arrow-left"></i> Cancelar', ['catalogs/proyecto/index'], ['class'=> 'btn btn-danger'])?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>   
+</div>
+
+<?php ActiveForm::end(); ?>

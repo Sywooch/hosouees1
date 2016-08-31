@@ -23,45 +23,46 @@ $personas = ArrayHelper::map($proyecto->idPersonas, 'IdPersona', 'NombreCompleto
 <div class="asistencia-form">
 
     <?php $form = ActiveForm::begin(); ?>
+            <?= $form->field($model, 'IdProyecto')->hiddenInput(['value' => $idProyecto])->label(false) ?>    
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <?= $form->field($model, 'IdPersona')->dropDownList($personas, 
+                     ['prompt'=>'- Seleccione el estudiante -', 'id'=>'estudiante-id'])->label('Estudiante') ?>    
 
-    <?= $form->field($model, 'IdProyecto')->hiddenInput(['value' => $idProyecto])->label(false) ?>
-    
-    <?= $form->field($model, 'IdPersona')->dropDownList($personas, 
-             ['prompt'=>'- Seleccione el estudiante -', 'id'=>'estudiante-id'])->label('Estudiante') ?>    
-    
-    <?php
-    echo $form->field($model, 'Fecha')->input('date');
-//    echo $form->field($model, 'Fecha')->widget(KDatePicker::classname(), [
-//       'options' => ['placeholder' => 'Fecha de asistencia ...', ''],
-//       'pluginOptions' => [
-//           'autoclose'=>true,
-//           'format' => 'yyyy/mm/dd'
-//       ]
-//   ]); 
-    
+            <?php
+            echo $form->field($model, 'Fecha')->input('date');
+        //    echo $form->field($model, 'Fecha')->widget(KDatePicker::classname(), [
+        //       'options' => ['placeholder' => 'Fecha de asistencia ...', ''],
+        //       'pluginOptions' => [
+        //           'autoclose'=>true,
+        //           'format' => 'yyyy/mm/dd'
+        //       ]
+        //   ]); 
 
-    ?>
 
-    <?php
-    echo $form->field($model, 'HoraEntrada')->input('time');
-//    echo $form->field($model, 'HoraEntrada')->widget(TimePicker::classname(), []);
-    ?>
-    
-    <?php
-    echo $form->field($model, 'HoraSalida')->input('time');
-//    echo $form->field($model, 'HoraSalida')->widget(TimePicker::classname(), []);
-    ?>    
+            ?>      
+            <?php
+            echo $form->field($model, 'HoraEntrada')->input('time');
+        //    echo $form->field($model, 'HoraEntrada')->widget(TimePicker::classname(), []);
+            ?>
 
-    <?= $form->field($model, 'CantidadHoras')->textInput() ?>
+            <?php
+            echo $form->field($model, 'HoraSalida')->input('time');
+        //    echo $form->field($model, 'HoraSalida')->widget(TimePicker::classname(), []);
+            ?>             
+        </div>  
+        <div class="col-md-6 col-sm-6">   
 
-    <?= $form->field($model, 'Comentarios')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'CantidadHoras')->textInput() ?>
 
-    <?= $form->field($model, 'IdUsuarioRegistro')->hiddenInput(['value' => Yii::$app->user->id])->label(false)?>
-    
-    <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
-             ['prompt'=>'- Seleccione el estado del registro-']) ?>
+            <?= $form->field($model, 'Comentarios')->textarea(['maxlength' => true]) ?>
 
-  
+            <?= $form->field($model, 'IdUsuarioRegistro')->hiddenInput(['value' => Yii::$app->user->id])->label(false)?>
+
+            <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
+                     ['prompt'=>'- Seleccione el estado del registro-']) ?>            
+        </div>        
+    </div>  
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
 	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

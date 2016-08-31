@@ -15,27 +15,29 @@ $personas = ArrayHelper::map(Persona::find()->where(['EstadoRegistro' => '1', 'T
 <div class="horas-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    
-    <?= $form->field($model, 'IdPersona')->hiddenInput(['value' => $model->IdPersona])->label(false) ?>
-    
-    <?= $form->field($model, 'IdProyecto')->hiddenInput(['value' => $model->IdProyecto])->label(false) ?>
-        
-    <?= $form->field($model, 'HorasRealizadas')->textInput() ?>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <?= $form->field($model, 'IdPersona')->hiddenInput(['value' => $model->IdPersona])->label(false) ?>
 
-    <?= $form->field($model, 'HorasRestantes')->textInput() ?>
-    
-    <?= $form->field($model, 'ProyectoCompleto')->dropDownList(CrudHelper::getSiNo(), 
-             ['prompt'=>'- Seleccione si el estudiante ha completado el proyecto-']) ?>    
-    
-    <?= $form->field($model, 'PersonaActiva')->dropDownList(CrudHelper::getSiNo(), 
-             ['prompt'=>'- Seleccione si el estudiante sigue activo en el proyecto-']) ?>      
+            <?= $form->field($model, 'HorasRealizadas')->textInput() ?>
 
-    <?= $form->field($model, 'IdUsuarioRegistro')->hiddenInput(['value' => Yii::$app->user->id])->label(false) ?>
+            <?= $form->field($model, 'HorasRestantes')->textInput() ?>
 
-    <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
-             ['prompt'=>'- Seleccione el estado del registro-']) ?>
+            <?= $form->field($model, 'ProyectoCompleto')->dropDownList(CrudHelper::getSiNo(), 
+             ['prompt'=>'- Seleccione si el estudiante ha completado el proyecto-']) ?>             
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <?= $form->field($model, 'IdProyecto')->hiddenInput(['value' => $model->IdProyecto])->label(false) ?>
+            
+            <?= $form->field($model, 'PersonaActiva')->dropDownList(CrudHelper::getSiNo(), 
+                     ['prompt'=>'- Seleccione si el estudiante sigue activo en el proyecto-']) ?>      
 
-  
+            <?= $form->field($model, 'IdUsuarioRegistro')->hiddenInput(['value' => Yii::$app->user->id])->label(false) ?>
+
+            <?= $form->field($model, 'EstadoRegistro')->dropDownList(CrudHelper::getEstadosRegistro(), 
+                     ['prompt'=>'- Seleccione el estado del registro-']) ?>            
+        </div>        
+    </div>   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
 	        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

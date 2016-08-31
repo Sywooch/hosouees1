@@ -38,10 +38,10 @@ body {
 <h1 class="text-center">SISTEMA DE GESTION DE HORAS SOCIALES</h1>
 <div class="row">
     <div class="col-md-2 col-md-offset-2 conceptos">
-        <b>Misión</b>
+<!--        <b>Misión</b>
         <br/>
         “Formar profesionales con excelencia académica, conscientes del servicio a sus semejantes y con una ética 
-        cristiana basada en las sagradas escrituras para responder a las necesidades y cambios de la sociedad” 
+        cristiana basada en las sagradas escrituras para responder a las necesidades y cambios de la sociedad” -->
     </div>
     <div class="col-md-4 loginForm">
         <div class="panel panel-default">
@@ -86,10 +86,10 @@ body {
         <?php endif ?>    
     </div>
     <div class="col-md-2 conceptos">
-        <b>Visión</b>
+<!--        <b>Visión</b>
         <br/>        
         “Ser la institución de educación superior, líder regional por su excelencia académica e innovación 
-        científica y tecnológica; reconocida por su naturaleza y práctica cristiana.”              
+        científica y tecnológica; reconocida por su naturaleza y práctica cristiana.”              -->
     </div>
 </div>
 <div class="row">

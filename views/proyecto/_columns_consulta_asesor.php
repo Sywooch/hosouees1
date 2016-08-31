@@ -21,7 +21,7 @@ return [
     [
         'format' => 'html',    
         'value' => function ($data) {
-            return Html::img(Yii::getAlias('@web').'/uploads/'. $data->ArchivoAdjunto, ['width'=>'250px', 'height'=>'250px', 'class'=>'img img-responsive img-thumbnail']);
+            return Html::img(Yii::getAlias('@web').'/uploads/'. $data->ArchivoAdjunto, ['width'=>'100px', 'height'=>'100px', 'class'=>'img img-responsive img-thumbnail']);
         }
     ],               
     [
