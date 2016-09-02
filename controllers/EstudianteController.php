@@ -8,6 +8,8 @@ use app\modules\catalogs\models\PersonaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
+use yii\helpers\Html;
 
 /**
  * PersonaController implements the CRUD actions for Persona model.
@@ -205,4 +207,58 @@ class EstudianteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionGenerarReporte()
+    {
+        $searchModel = new PersonaSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams,'ES');
+
+        return $this->render('generar-reporte', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionReporteIframe($idPersona){
+        return $this->renderPartial('generar-reporte-iframe', [
+            'idPersona' => $idPersona,
+        ]);        
+    }
+    
+    public function actionReporte($idPersona) {
+        $estudiante = Persona::findOne(['IdPersona' => $idPersona]);
+        // get your HTML raw content without any layouts or scripts
+        $content = $this->renderPartial('_reporte',[
+            'estudiante' => $estudiante
+        ]);
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // Letter paper format
+            'format' => Pdf::FORMAT_LETTER, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER, 
+            // your html content input
+            'content' => $content,  
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'Reporte de horas sociales de '.$estudiante->NombreCompleto],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetHeader'=>['Reporte de horas sociales de '.$estudiante->NombreCompleto.' al '.date('d-m-Y').Html::img('@web/img/logo.png', ['width'=>'25px', 'height' =>'25px', 'align'=>'center', 'class'=> ''])], 
+                'SetFooter'=>['Página {PAGENO}'],
+            ]
+        ]);
+
+        // return the pdf output as per the destination setting
+        return $pdf->render(); 
+    }    
+    
 }

@@ -26,6 +26,7 @@ use yii\helpers\Html;
 //                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
 //                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
                     ['label' => 'Parámetros', 'icon' => 'fa fa-gears fa-2x', 'url' => ['/configuracion'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
+                    ['label' => 'Reporte de horas sociales', 'icon' => 'fa fa-file fa-2x', 'url' => ['/estudiante/generar-reporte'], 'visible' => Yii::$app->user->can('GenerarReporte')],
                     ['label' => 'Proyectos abiertos', 'icon' => 'fa fa-flag fa-2x', 'url' => ['/proyecto/consulta'], 'visible' => Yii::$app->user->can('ConsultaProyectosAbiertos')],
                     ['label' => 'Proyectos asesorados', 'icon' => 'fa fa-users fa-2x', 'url' => ['/proyecto/consulta-asesor'], 'visible' => Yii::$app->user->can('ConsultaAsesor')],
                     ['label' => 'Mis proyectos', 'icon' => 'fa fa-user fa-2x', 'url' => ['/proyecto/consulta-estudiante'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
