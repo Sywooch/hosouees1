@@ -145,4 +145,9 @@ class SiteController extends Controller
         $directoryAsset = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
         return $this->render('widgets', ['directoryAsset' => $directoryAsset]);
     }     
+    
+    public function actionInfoGeneral()
+    {
+         return $this->render('info-general');
+    }
 }

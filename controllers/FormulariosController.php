@@ -146,7 +146,7 @@ class FormulariosController extends Controller
                     $path = $model->getImageFile();
                     $image->saveAs($path);
                 }
-                return $this->redirect(['/formularios', 'id' => $model->IdPersona]);
+                return $this->redirect(['/formularios']);
             } else {
                 // error in saving model
             }

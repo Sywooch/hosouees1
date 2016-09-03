@@ -11,6 +11,7 @@ use Yii;
  * @property integer $CantidadHorasSociales
  * @property string $PesoMaximoAdjuntos
  * @property string $TextoBienvenida 
+ * @property string $TextoBienvenidaNoElegible
  * @property string $EstadoRegistro
  */
 class Configuracion extends \yii\db\ActiveRecord
@@ -31,7 +32,7 @@ class Configuracion extends \yii\db\ActiveRecord
         return [
             [['CantidadHorasSociales', 'PesoMaximoAdjuntos'], 'required'],
             [['CantidadHorasSociales'], 'integer'],
-            [['TextoBienvenida'], 'string'], 
+            [['TextoBienvenida', 'TextoBienvenidaNoElegible'], 'string'], 
             [['PesoMaximoAdjuntos'], 'string', 'max' => 15],
             [['EstadoRegistro'], 'string', 'max' => 1],
         ];
@@ -47,6 +48,7 @@ class Configuracion extends \yii\db\ActiveRecord
             'CantidadHorasSociales' => Yii::t('app', 'Cantidad de horas sociales requeridas por cada alumno'),
             'PesoMaximoAdjuntos' => Yii::t('app', 'Peso maximo de los archivos a cargar'),
             'TextoBienvenida' => Yii::t('app', 'Texto Bienvenida'), 
+            'TextoBienvenidaNoElegible' => Yii::t('app', 'Texto Bienvenida para estudiantes no elegibles'), 
             'EstadoRegistro' => Yii::t('app', 'Estado Registro'),
         ];
     }

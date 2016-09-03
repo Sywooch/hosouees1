@@ -94,7 +94,7 @@ body {
 </div>
 <div class="row">
     <div class="col-md-4 col-md-offset-4 conceptos">
-        <b>Nota:</b> Para los estudiantes que ingresaron por equivalencias se les informa que pueden
-        realizar el servicio social a partir del séptimo ciclo o con 30 materias aprobadas.     
+<!--        <b>Nota:</b> Para los estudiantes que ingresaron por equivalencias se les informa que pueden
+        realizar el servicio social a partir del séptimo ciclo o con 30 materias aprobadas.     -->
     </div>
 </div>

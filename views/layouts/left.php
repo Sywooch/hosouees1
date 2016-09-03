@@ -25,15 +25,16 @@ use yii\helpers\Html;
 //                    ['label' => 'Gii', 'icon' => 'fa fa-file-code-o', 'url' => ['/gii']],
 //                    ['label' => 'Debug', 'icon' => 'fa fa-dashboard', 'url' => ['/debug']],
 //                    ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
-                    ['label' => 'Parámetros', 'icon' => 'fa fa-gears fa-2x', 'url' => ['/configuracion'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
-                    ['label' => 'Reporte de horas sociales', 'icon' => 'fa fa-file fa-2x', 'url' => ['/estudiante/generar-reporte'], 'visible' => Yii::$app->user->can('GenerarReporte')],
-                    ['label' => 'Proyectos abiertos', 'icon' => 'fa fa-flag fa-2x', 'url' => ['/proyecto/consulta'], 'visible' => Yii::$app->user->can('ConsultaProyectosAbiertos')],
-                    ['label' => 'Proyectos asesorados', 'icon' => 'fa fa-users fa-2x', 'url' => ['/proyecto/consulta-asesor'], 'visible' => Yii::$app->user->can('ConsultaAsesor')],
-                    ['label' => 'Mis proyectos', 'icon' => 'fa fa-user fa-2x', 'url' => ['/proyecto/consulta-estudiante'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
-                    ['label' => 'Descarga de formularios', 'icon' => 'fa fa-file fa-2x', 'url' => ['/formularios/descarga'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
+                    ['label' => 'Misión, Visión y Valores', 'icon' => 'fa fa-bookmark fa-1x', 'url' => ['/site/info-general']],
+                    ['label' => 'Parámetros', 'icon' => 'fa fa-gears fa-1x', 'url' => ['/configuracion'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
+                    ['label' => 'Reporte de horas sociales', 'icon' => 'fa fa-file fa-1x', 'url' => ['/estudiante/generar-reporte'], 'visible' => Yii::$app->user->can('GenerarReporte')],
+                    ['label' => 'Proyectos abiertos', 'icon' => 'fa fa-flag fa-1x', 'url' => ['/proyecto/consulta'], 'visible' => Yii::$app->user->can('ConsultaProyectosAbiertos')],
+                    ['label' => 'Proyectos asesorados', 'icon' => 'fa fa-users fa-1x', 'url' => ['/proyecto/consulta-asesor'], 'visible' => Yii::$app->user->can('ConsultaAsesor')],
+                    ['label' => 'Mis proyectos', 'icon' => 'fa fa-user fa-1x', 'url' => ['/proyecto/consulta-estudiante'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
+                    ['label' => 'Descarga de formularios', 'icon' => 'fa fa-file fa-1x', 'url' => ['/formularios/descarga'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
                     [
                         'label' => 'Usuarios y permisos',
-                        'icon' => 'fa fa-user fa-2x',
+                        'icon' => 'fa fa-user fa-1x',
                         'url' => '#',
                         'visible'=> Yii::$app->user->can('AdministrarRBAC'),
                         'items' => [
@@ -46,7 +47,7 @@ use yii\helpers\Html;
                     ],        
                     [
                         'label' => 'Catálogos',
-                        'icon' => 'fa fa-navicon fa-2x',
+                        'icon' => 'fa fa-navicon fa-1x',
                         'url' => '#',
                         'visible'=> Yii::$app->user->can('AdministrarCatalogos'),
                         'items' => [

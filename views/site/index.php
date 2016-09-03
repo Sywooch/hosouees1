@@ -10,7 +10,16 @@ $persona = PersonaHelper::getPersona();
 //echo $persona->getCantidadHorasSociales();
 ?>
 <div class="site-index">
-    <?php echo $configuracion->TextoBienvenida?>
+    <?php 
+    if($persona->Elegible == '0' && $persona->TipoPersona == 'ES')
+    {
+        echo $configuracion->TextoBienvenidaNoElegible;
+    }
+    else
+    {
+        echo $configuracion->TextoBienvenida;
+    }
+    ?>
 </div>
 <script>
 //    alert('hosouees');
