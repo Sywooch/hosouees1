@@ -38,6 +38,11 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'CantidadHorasSociales',
+        'label'=> 'Cantidad horas sociales',
+    ],    
+    [
+        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'NombreCorto',
     ],
     [

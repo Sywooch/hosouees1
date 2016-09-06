@@ -12,6 +12,7 @@ use Yii;
  * @property string $NombreCorto
  * @property integer $IdFacultad
  * @property string $EstadoRegistro
+ * @property integer $CantidadHorasSociales
  *
  * @property Facultad $idFacultad
  * @property Persona[] $personas
@@ -33,8 +34,8 @@ class Carrera extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Nombre'], 'required'],
-            [['IdFacultad'], 'integer'],
+            [['Nombre', 'CantidadHorasSociales'], 'required'],
+            [['IdFacultad', 'CantidadHorasSociales'], 'integer'],
             [['Nombre', 'NombreCorto'], 'string', 'max' => 100],
             [['EstadoRegistro'], 'string', 'max' => 1],
             [['IdFacultad'], 'exist', 'skipOnError' => true, 'targetClass' => Facultad::className(), 'targetAttribute' => ['IdFacultad' => 'IdFacultad']],
@@ -51,6 +52,7 @@ class Carrera extends \yii\db\ActiveRecord
             'Nombre' => Yii::t('app', 'Nombre'),
             'NombreCorto' => Yii::t('app', 'Nombre Corto'),
             'IdFacultad' => Yii::t('app', 'Facultad'),
+            'CantidadHorasSociales' => Yii::t('app', 'Cantidad máxima de Horas sociales para los estudiantes de la carrera'),
             'EstadoRegistro' => Yii::t('app', 'Estado Registro'),
         ];
     }

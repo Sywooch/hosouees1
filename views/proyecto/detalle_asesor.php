@@ -26,14 +26,23 @@ use app\helpers\CrudHelper;
   <div id="estudiantes" class="tab-pane fade">
     <ul class="list-group">
       <?php 
-      foreach($model->idPersonasActivas as $estudiante)
+      foreach($model->idPersonas as $estudiante)
       {
           ?>
             <li class="list-group-item">
-            <?= Html::img('@web/uploads/'.$estudiante->ArchivoAdjunto, ['width'=>'150px', 'height' =>'150px', 'align'=>'center', 'class'=> 'img img-responsive img-thumbnail']);?> 
-            <b><?= $estudiante->CarnetEstudiante?></b> <?= $estudiante->NombreCompleto?> 
-            <span class="badge badge-info"><?= $estudiante->idCarrera->Nombre?></span>   
-            
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <?= Html::img('@web/uploads/'.$estudiante->ArchivoAdjunto, ['width'=>'150px', 'height' =>'150px', 'align'=>'center', 'class'=> 'img img-responsive img-thumbnail']);?> 
+                        <br/>
+                        <?= $estudiante->CarnetEstudiante?></b> <?= $estudiante->NombreCompleto?> 
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <span class="info"><?= $estudiante->idCarrera->Nombre?></span>  
+                    </div>
+                    <div class="col-md-4  col-sm-4">
+                        <?=Html::a('<i class="glyphicon glyphicon-download fa-2x"></i> Generar reporte', ['estudiante/reporte-proyecto', 'idPersona' => $estudiante->IdPersona, 'idProyecto' => $model->IdProyecto], ['target'=> '_blank'])?>
+                    </div>                    
+                </div>            
             </li>
           <?php
           

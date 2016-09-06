@@ -10,8 +10,10 @@ use app\helpers\CrudHelper;
 <div class="facultad-form">
 
     <?php $form = ActiveForm::begin(); ?>
-    <?= $form->field($model, 'IdUniversidad')->dropDownList($universidades, 
-             ['prompt'=>'- Seleccione la universidad -']) ?>
+    <?php // echo $form->field($model, 'IdUniversidad')->dropDownList($universidades, 
+//             ['prompt'=>'- Seleccione la universidad -']) ?>
+    
+    <?= $form->field($model, 'IdUniversidad')->hiddenInput(['value' => 1])->label(false) ?>
     
     <?= $form->field($model, 'Nombre')->textInput(['maxlength' => true]) ?>
 

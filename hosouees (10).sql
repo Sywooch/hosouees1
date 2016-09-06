@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2016 a las 17:52:21
+-- Tiempo de generación: 06-09-2016 a las 00:38:21
 -- Versión del servidor: 5.7.13-0ubuntu0.16.04.2
 -- Versión de PHP: 7.0.8-0ubuntu0.16.04.2
 
@@ -47,7 +47,9 @@ INSERT INTO `asistencia` (`IdAsistencia`, `IdProyecto`, `IdPersona`, `Fecha`, `H
 (1, 15, 2, '2016-08-20', '08:30:00', '12:00:00', 4, 'acasc', 3, '1'),
 (2, 16, 2, '2016-08-22', '07:30:00', '11:30:00', 4, 'Asistencia en la mañana....', 3, '1'),
 (3, 16, 2, '2016-08-19', '07:30:00', '05:30:00', 10, '....', 3, '1'),
-(4, 16, 1, '2016-08-18', '08:00:00', '12:00:00', 4, 'comentarios de asistencaia Juana Lopez', 3, '1');
+(4, 16, 1, '2016-08-18', '08:00:00', '12:00:00', 4, 'comentarios de asistencaia Juana Lopez', 3, '1'),
+(5, 15, 7, '2016-09-05', '08:00:00', '12:00:00', 4, 'Asistencia normal', 3, '1'),
+(6, 16, 7, '2016-09-05', '07:00:00', '12:00:00', 5, 'sdadasdada', 3, '1');
 
 -- --------------------------------------------------------
 
@@ -70,6 +72,8 @@ INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('Coordinador', '5', 1471995304),
 ('Estudiante', '2', 1470881064),
 ('Estudiante', '4', 1471920745),
+('Estudiante', '6', 1472925615),
+('Estudiante', '8', 1473117010),
 ('Supervisor', '3', 1471568351);
 
 -- --------------------------------------------------------
@@ -94,7 +98,7 @@ CREATE TABLE `auth_item` (
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 ('AccederGII', 2, 'Permiso para acceder al menu GII', NULL, NULL, 1471811890, 1471811890),
-('Administrador', 1, 'Administrador', NULL, NULL, 1470816328, 1472423766),
+('Administrador', 1, 'Administrador', NULL, NULL, 1470816328, 1472788291),
 ('Administrador de proyecto', 1, 'Administrador de proyecto en la institucion', NULL, NULL, 1471397869, 1471397869),
 ('AdministrarCatalogos', 2, 'Permiso para administrar catalogos', NULL, NULL, 1471811663, 1471811663),
 ('AdministrarRBAC', 2, 'Administración de Roles y permisos', NULL, NULL, 1471811823, 1471811823),
@@ -102,8 +106,9 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('ConsultaAsesor', 2, 'Consulta de proyectos  del asesor', NULL, NULL, 1471915157, 1471915157),
 ('ConsultaEstudiante', 2, 'Consulta de proyectos de horas sociales del estudiante', NULL, NULL, 1471915106, 1471915106),
 ('ConsultaProyectosAbiertos', 2, 'Consulta de los proyectos de horas sociales abiertos', NULL, NULL, 1471915217, 1471915217),
-('Coordinador', 1, 'Coordinador de proyectos de horas sociales', NULL, NULL, 1470880648, 1472423779),
+('Coordinador', 1, 'Coordinador de proyectos de horas sociales', NULL, NULL, 1470880648, 1472924582),
 ('Estudiante', 1, 'Estudiante de la UEES', NULL, NULL, 1470880684, 1471915230),
+('GenerarReporte', 2, 'Generacion de Reporte de Horas sociales realizadas', NULL, NULL, 1472788278, 1472788278),
 ('MantoAsignaciones', 2, 'Asignacion de permisos', NULL, NULL, 1471410730, 1471410730),
 ('MantoCarreras', 2, 'Acceso al mantenimiento de carreras', NULL, NULL, 1471477751, 1471477751),
 ('MantoFacultades', 2, 'Permite acceder al mantenimiento de facultades en el sistema', NULL, NULL, 1470953345, 1471477675),
@@ -116,7 +121,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 ('MantoRoles', 2, 'Mantenimiento de roles', NULL, NULL, 1471410686, 1471410686),
 ('MantoUniversidades', 2, 'Registrar universidades', NULL, NULL, 1471477722, 1471477722),
 ('MantoUsuarios', 2, 'Mantenimiento de Usuarios', NULL, NULL, 1471410651, 1471410651),
-('Supervisor', 1, 'Supervisor de proyectos de horas sociales', NULL, NULL, 1470880665, 1471915249),
+('Supervisor', 1, 'Supervisor de proyectos de horas sociales', NULL, NULL, 1470880665, 1473134289),
 ('VerTodosProyectos', 2, 'Puede dar gestión a todos los proyectos de horas sociales', NULL, NULL, 1471709698, 1471709698);
 
 -- --------------------------------------------------------
@@ -137,28 +142,35 @@ CREATE TABLE `auth_item_child` (
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 ('Administrador', 'AccederGII'),
 ('Administrador', 'AdministrarCatalogos'),
+('Coordinador', 'AdministrarCatalogos'),
 ('Administrador', 'AdministrarRBAC'),
+('Coordinador', 'AdministrarRBAC'),
 ('Administrador', 'ConfigurarParametros'),
 ('Coordinador', 'ConsultaAsesor'),
 ('Supervisor', 'ConsultaAsesor'),
 ('Estudiante', 'ConsultaEstudiante'),
-('Coordinador', 'ConsultaProyectosAbiertos'),
 ('Estudiante', 'ConsultaProyectosAbiertos'),
 ('Supervisor', 'ConsultaProyectosAbiertos'),
+('Administrador', 'GenerarReporte'),
+('Coordinador', 'GenerarReporte'),
 ('Administrador', 'MantoAsignaciones'),
+('Coordinador', 'MantoAsignaciones'),
 ('Administrador', 'MantoCarreras'),
 ('Administrador', 'MantoFacultades'),
+('Coordinador', 'MantoFacultades'),
 ('Administrador', 'MantoFormularios'),
 ('Coordinador', 'MantoFormularios'),
 ('Administrador', 'MantoInstituciones'),
 ('Administrador', 'MantoPermisos'),
 ('Administrador', 'MantoPersonas'),
+('Coordinador', 'MantoPersonas'),
 ('Administrador', 'MantoProyectos'),
 ('Coordinador', 'MantoProyectos'),
 ('Administrador', 'MantoReglas'),
 ('Administrador', 'MantoRoles'),
 ('Administrador', 'MantoUniversidades'),
 ('Administrador', 'MantoUsuarios'),
+('Coordinador', 'MantoUsuarios'),
 ('Administrador', 'VerTodosProyectos'),
 ('Coordinador', 'VerTodosProyectos');
 
@@ -186,6 +198,7 @@ CREATE TABLE `carrera` (
   `Nombre` varchar(100) NOT NULL COMMENT 'nombre de la carrera',
   `NombreCorto` varchar(100) DEFAULT NULL COMMENT 'nombre corto de la carrera',
   `IdFacultad` int(11) DEFAULT NULL COMMENT 'Codigo identificador de la facultad',
+  `CantidadHorasSociales` int(11) DEFAULT NULL,
   `EstadoRegistro` char(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -193,9 +206,9 @@ CREATE TABLE `carrera` (
 -- Volcado de datos para la tabla `carrera`
 --
 
-INSERT INTO `carrera` (`IdCarrera`, `Nombre`, `NombreCorto`, `IdFacultad`, `EstadoRegistro`) VALUES
-(1, 'Medicina General', 'MEDGE', 5, '1'),
-(2, 'Ingeniería en Sistemas Informáticos', 'ISI', 4, '1');
+INSERT INTO `carrera` (`IdCarrera`, `Nombre`, `NombreCorto`, `IdFacultad`, `CantidadHorasSociales`, `EstadoRegistro`) VALUES
+(2, 'Ingeniería en Sistemas Informáticos', 'ISI', 4, 500, '1'),
+(3, 'Técnico en Ingeniería de Sistemas', 'TIS', 4, 250, '1');
 
 -- --------------------------------------------------------
 
@@ -242,6 +255,7 @@ CREATE TABLE `configuracion` (
   `CantidadHorasSociales` int(11) NOT NULL COMMENT 'Cantidad de horas sociales requeridas por cada alumno',
   `PesoMaximoAdjuntos` varchar(15) NOT NULL COMMENT 'Peso maximo de los archivos a cargar',
   `TextoBienvenida` text,
+  `TextoBienvenidaNoElegible` text,
   `EstadoRegistro` char(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -249,8 +263,8 @@ CREATE TABLE `configuracion` (
 -- Volcado de datos para la tabla `configuracion`
 --
 
-INSERT INTO `configuracion` (`IdConfiguracion`, `CantidadHorasSociales`, `PesoMaximoAdjuntos`, `TextoBienvenida`, `EstadoRegistro`) VALUES
-(1, 500, '2MB', '<div class="well text text-info">\r\n<h2><span style="color: #000080;">SERVICIO SOCIAL ESTUDIANTIL</span></h2>\r\n<div align="justify">\r\n<p>1-&iquest;QU&Eacute; ES EL SERVICIO SOCIAL? <br /> 2-OBJETIVOS <br /> 3-VALORES UNIVERSITARIOS <br /> 4-REALIZACI&Oacute;N DEL SERVICIO SOCIAL <br /> <br /> <strong> 1-&iquest;QU&Eacute; ES EL SERVICIO SOCIAL? </strong><br /> &ldquo;Se entiende por servicio social universitario, la realizaci&oacute;n obligatoria de actividades temporales que ejecuten los estudiantes de carreras t&eacute;cnicas y profesionales, tendientes a la aplicaci&oacute;n de los conocimientos que hayan obtenido y que impliquen el ejercicio de la pr&aacute;ctica profesional en beneficio o inter&eacute;s de la sociedad&rdquo; <br /> <br /> <strong>2-OBJETIVOS </strong></p>\r\n<ul>\r\n<li>Desarrollar en el prestador una conciencia de solidaridad y compromiso con la sociedad a la que pertenece.</li>\r\n<li>Convertir la prestaci&oacute;n en un acto de reciprocidad con la sociedad.</li>\r\n<li>Contribuir con la formaci&oacute;n acad&eacute;mica y capacitaci&oacute;n profesional del prestador de Servicio Social. </li>\r\n</ul>\r\n<p align="justify"><strong>3-VALORES UNIVERSITARIOS </strong></p>\r\n<p align="justify">Honestidad, solidaridad, puntualidad, voluntad, humildad, disponibilidad, cooperaci&oacute;n, sensibilidad, responsabilidad y compromiso social <br /> <br /> <strong>4-REALIZACI&Oacute;N DEL SERVICIO SOCIAL </strong></p>\r\n<p>El estudiante podr&aacute; optar entre las siguientes alternativas:</p>\r\n<p>Internamente: en programas o proyectos de desarrollo, investigaci&oacute;n, docencia, unidades de producci&oacute;n o apoyo administrativo.</p>\r\n<p>Externamente: en dependencias federales, estatales o municipales; uniones de producci&oacute;n; as&iacute; como aquellas instituciones donde se cumpla con los principios que definen el Servicio Social. <br /> </p>\r\n</div>\r\n</div>', '1');
+INSERT INTO `configuracion` (`IdConfiguracion`, `CantidadHorasSociales`, `PesoMaximoAdjuntos`, `TextoBienvenida`, `TextoBienvenidaNoElegible`, `EstadoRegistro`) VALUES
+(1, 500, '2MB', '<div class="well text text-info">\r\n<h2><span style="color: #000080;">SERVICIO SOCIAL ESTUDIANTIL</span></h2>\r\n<div align="justify">\r\n<p>1-&iquest;QU&Eacute; ES EL SERVICIO SOCIAL? <br /> 2-OBJETIVOS <br /> 3-VALORES UNIVERSITARIOS <br /> 4-REALIZACI&Oacute;N DEL SERVICIO SOCIAL <br /> <br /> <strong> 1-&iquest;QU&Eacute; ES EL SERVICIO SOCIAL? </strong><br /> &ldquo;Se entiende por servicio social universitario, la realizaci&oacute;n obligatoria de actividades temporales que ejecuten los estudiantes de carreras t&eacute;cnicas y profesionales, tendientes a la aplicaci&oacute;n de los conocimientos que hayan obtenido y que impliquen el ejercicio de la pr&aacute;ctica profesional en beneficio o inter&eacute;s de la sociedad&rdquo; <br /> <br /> <strong>2-OBJETIVOS </strong></p>\r\n<ul>\r\n<li>Desarrollar en el prestador una conciencia de solidaridad y compromiso con la sociedad a la que pertenece.</li>\r\n<li>Convertir la prestaci&oacute;n en un acto de reciprocidad con la sociedad.</li>\r\n<li>Contribuir con la formaci&oacute;n acad&eacute;mica y capacitaci&oacute;n profesional del prestador de Servicio Social.</li>\r\n</ul>\r\n<p align="justify"><strong>3-VALORES UNIVERSITARIOS </strong></p>\r\n<p align="justify">Honestidad, solidaridad, puntualidad, voluntad, humildad, disponibilidad, cooperaci&oacute;n, sensibilidad, responsabilidad y compromiso social <br /> <br /> <strong>4-REALIZACI&Oacute;N DEL SERVICIO SOCIAL </strong></p>\r\n<p>El estudiante podr&aacute; optar entre las siguientes alternativas:</p>\r\n<p>Internamente: en programas o proyectos de desarrollo, investigaci&oacute;n, docencia, unidades de producci&oacute;n o apoyo administrativo.</p>\r\n<p>Externamente: en dependencias federales, estatales o municipales; uniones de producci&oacute;n; as&iacute; como aquellas instituciones donde se cumpla con los principios que definen el Servicio Social.</p>\r\n</div>\r\n</div>', '<h1><strong>Por el momento no puede ingresar al sistema con su usuario ya que usted aun no es elegible para postularse para proyectos de horas sociales.</strong></h1>\r\n<h1>&nbsp;</h1>\r\n<h1><strong>Nota</strong>: Para los estudiantes que ingresaron por equivalencias se les informa que pueden&nbsp;realizar el servicio social a partir del s&eacute;ptimo ciclo o con 35 materias aprobadas.</h1>', '1');
 
 -- --------------------------------------------------------
 
@@ -295,8 +309,7 @@ CREATE TABLE `facultad` (
 --
 
 INSERT INTO `facultad` (`IdFacultad`, `Nombre`, `Descripcion`, `NombreCorto`, `IdUniversidad`, `EstadoRegistro`) VALUES
-(4, 'Facultad de Ingeniería y Arquitectura', '', 'FIYA', 1, '1'),
-(5, 'Medicina', 'Facuktad de medicina', 'FACMED', 1, '1');
+(4, 'Facultad de Ingeniería y Arquitectura', '', 'FIYA', 1, '1');
 
 -- --------------------------------------------------------
 
@@ -319,7 +332,8 @@ CREATE TABLE `formularios` (
 --
 
 INSERT INTO `formularios` (`IdFormulario`, `NombreFormulario`, `Reglamentos`, `DescripcionFormulario`, `ArchivoAdjunto`, `NombreAdjunto`, `EstadoRegistro`) VALUES
-(4, 'g', 'g', 'g', 'M0Vd0bLi7ek-Dp8M8bg5MQjwYO7RFVWY.png', 'Captura de pantalla de 2016-08-22 21-16-30.png', '1');
+(4, 'g', 'g', 'g', 'M0Vd0bLi7ek-Dp8M8bg5MQjwYO7RFVWY.png', 'Captura de pantalla de 2016-08-22 21-16-30.png', '1'),
+(5, 'nombre del formulario', 'reglamentos', 'deSCRIPCION DEL FOR', '1iD0Us7lGNH1KN3_d2EsYOnW5__YiiJ2.png', 'logo.png', '1');
 
 -- --------------------------------------------------------
 
@@ -347,7 +361,9 @@ INSERT INTO `horas` (`IdPersona`, `IdProyecto`, `HorasRealizadas`, `HorasRestant
 (1, 15, 299, 200, '0', 'dasdasdasdasd', '1', 3, '1'),
 (1, 16, 201, 100, '0', NULL, '1', 3, '1'),
 (2, 15, 300, 250, '0', NULL, '1', 3, '1'),
-(2, 16, 0, 0, '0', NULL, '1', NULL, '1');
+(2, 16, 0, 0, '0', NULL, '1', NULL, '1'),
+(7, 15, 300, 200, '0', NULL, '1', 3, '1'),
+(7, 16, 200, 0, '0', NULL, '1', 3, '1');
 
 -- --------------------------------------------------------
 
@@ -490,11 +506,13 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`IdPersona`, `Nombres`, `Apellidos`, `CarnetEstudiante`, `CarnetEmpleado`, `Email`, `DUI`, `NIT`, `Direccion`, `Telefono`, `Sexo`, `Cargo`, `UserId`, `TipoPersona`, `IdCarrera`, `Elegible`, `ArchivoAdjunto`, `NombreAdjunto`, `EstadoRegistro`) VALUES
-(1, 'Juana', 'Lopez', 'LP201005', '', NULL, '09888888', '123123123', 'Mejicanos', '22766666', 'F', '', 4, 'ES', 1, '1', 'Tf8-EoznKqFiYqMq-AfzFkM-0IcW4F8z.png', 'avatar2.png', '1'),
-(2, 'Jose Alberto', 'Castaneda Alarcon', 'CA201010', '', NULL, '03743217-3', '', '', '', 'M', '', 2, 'ES', 1, '1', 'odFsDq_u6eFIH9AIa7v-3LxGnI5MK6qj.jpg', 'descarga (2).jpg', '1'),
-(3, 'ADmin', 'Admin', NULL, 'AS1010', NULL, '', '', 'Direccionasdasdasdasdasdasdasdasdas', '22334455', 'M', '', 1, 'EM', NULL, '0', 'nNNVjVZTqmXDydQNEFKrTo-mSCaabbT-.jpg', 'descarga (2).jpg', '1'),
+(1, 'Juana', 'Lopez', 'LP201005', '', NULL, '09888888', '123123123', 'Mejicanos', '22766666', 'F', '', 4, 'ES', 2, '1', 'Tf8-EoznKqFiYqMq-AfzFkM-0IcW4F8z.png', 'avatar2.png', '1'),
+(2, 'Jose Alberto', 'Castaneda Alarcon', 'CA201010', '', NULL, '03743217-3', '', '', '', 'M', '', 2, 'ES', 2, '1', 'odFsDq_u6eFIH9AIa7v-3LxGnI5MK6qj.jpg', 'descarga (2).jpg', '1'),
+(3, 'ADmin', 'Admin', NULL, 'AS1010', NULL, '', '', 'Direccionasdasdasdasdasdasdasdasdas', '22334455', 'M', '', 1, 'EM', NULL, '0', 'hAHKsO7mN3SK7nfkKySr78AO2eokAQ-b.jpg', 'descarga (1).jpg', '1'),
 (4, 'Julio Alberto', 'Flores Ayala', NULL, 'FA230000', NULL, '89789789', '98789789', 'direccion', '77889922', 'M', 'Asesor de proyectos ', 3, 'EM', NULL, '0', 'XWtxI26xEk9CJPRDJ1l-A-Yg8IvgHkfL.jpg', 'Cover-30-Cosas-que-toda-persona-con-deficit-de-atencion-520x272.jpg', '1'),
-(5, 'Napoleón', 'Gochez', NULL, 'GC998877', NULL, '231231', '2313', 'asdad', '123123', 'M', 'Coordinador de proyectos', 5, 'EM', NULL, '1', '0u7LHkyKnBECzqZV1lkDdVgn_fBBKXfH.png', 'avatar.png', '1');
+(5, 'Napoleón', 'Gochez', NULL, 'GC998877', NULL, '231231', '2313', 'asdad', '123123', 'M', 'Coordinador de proyectos', 5, 'EM', NULL, '1', '0u7LHkyKnBECzqZV1lkDdVgn_fBBKXfH.png', 'avatar.png', '1'),
+(6, 'Juan ', 'Perez', 'CA21312', NULL, NULL, '123', '123', 'direccion', '22789876', 'M', NULL, 7, 'ES', 2, '0', 'Mmg9WeI0V6ou0jyJUBDRudFF6fEePZNv.jpg', 'Cover-30-Cosas-que-toda-persona-con-deficit-de-atencion-520x272.jpg', '1'),
+(7, 'Jose Raul', 'Fernandez Martinez', '0305123', NULL, NULL, '123123123', '123123123', 'Direccion del estudiante', '22550011', 'M', NULL, 8, 'ES', 3, '1', '8cEENVkeAqpTkYVQGNJ-u3GjeoZTXuGp.jpg', 'descarga.jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -525,7 +543,7 @@ CREATE TABLE `proyecto` (
 
 INSERT INTO `proyecto` (`IdProyecto`, `NombreProyecto`, `HorasSolicitadas`, `HorasSocialesXhora`, `Ubicacion`, `FechaIni`, `FechaFin`, `IdInstitucion`, `IdEstadoProyecto`, `IdPersonaAsesor`, `NumeroPersonas`, `ArchivoAdjunto`, `NombreAdjunto`, `EstadoRegistro`) VALUES
 (15, 'proy1', 500, 3, 'ubi1', '2016-08-01', '2016-08-31', 1, 1, 4, 4, '4UCsFiNIvEdrNO9HVewdy4FIpVPqQYaV.jpg', 'descarga.jpg', '1'),
-(16, 'Mantenimiento preventivo de Desktops', 500, 2, 'Centro de gobierno', '2016-08-19', '2016-10-27', 2, 1, 4, 10, '87jXQwAg3ZWqWORkz05Wq3ZgfIfsPs9y.jpg', 'descarga (1).jpg', '1');
+(16, 'Mantenimiento preventivo de Desktops', 500, 2, 'Centro de gobierno', '2016-08-19', '2016-10-27', 2, 5, 4, 10, '87jXQwAg3ZWqWORkz05Wq3ZgfIfsPs9y.jpg', 'descarga (1).jpg', '1');
 
 -- --------------------------------------------------------
 
@@ -586,7 +604,8 @@ INSERT INTO `user_accounts` (`id`, `login`, `username`, `password_hash`, `auth_k
 (2, 'mail@mail.com', 'CA201010', '$2y$13$/Hdd.A2e/dn0VsFq0lNtmOMI01HZOwPOwgxgsv0lkk9jp.w.kbQvO', '123123', 0, 1, '127.0.0.1', NULL, NULL, NULL, 1470881021, 1470881021, 1472010002),
 (3, 'jose_canibal@hotmail.com', 'jflores', '$2y$13$DiWfT18Pn0EH3hWIcC/Pi.ZpvObjVRC/9I321ZXBKfayza6iEO32q', '123123', 0, 1, '127.0.0.1', NULL, NULL, NULL, 1471568308, 1471568308, 1472009650),
 (4, 'asdasd@gmail.com', 'LP201005', '$2y$13$CWAJrGCh.dsX9r7crFakCeu5XXbtElWTM5cK6Ol8g4qbZYvJ0/.ha', '123123', 0, 1, '127.0.0.1', NULL, NULL, NULL, 1471920692, 1471920692, -1),
-(5, 'smokecastaneda@gmail.com', 'ngochez', '$2y$13$2oQsyvvNzd6T0..cil.c9e2Pxj.DA1mHdqwJIHinrIXy5lVxa8KX2', '123123', 0, 1, '127.0.0.1', NULL, NULL, NULL, 1471993769, 1471993769, 1471995781);
+(5, 'smokecastaneda@gmail.com', 'ngochez', '$2y$13$2oQsyvvNzd6T0..cil.c9e2Pxj.DA1mHdqwJIHinrIXy5lVxa8KX2', '123123', 1, 1, '127.0.0.1', NULL, NULL, NULL, 1471993769, 1471993769, 1472924521),
+(8, 'raul_123@123.com', '0305123', '$2y$13$cOSS5dipNwHXAmPO5Rc1FuOF/Wnp7IVCzNnZdPZjbm0JTRrUuMUJm', '123123', 0, 1, '127.0.0.1', NULL, NULL, NULL, 1473116565, 1473116565, -1);
 
 -- --------------------------------------------------------
 
@@ -778,12 +797,12 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `asistencia`
 --
 ALTER TABLE `asistencia`
-  MODIFY `IdAsistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdAsistencia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `carrera`
 --
 ALTER TABLE `carrera`
-  MODIFY `IdCarrera` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo identificador de la carrera', AUTO_INCREMENT=3;
+  MODIFY `IdCarrera` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo identificador de la carrera', AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `comunicacion`
 --
@@ -803,12 +822,12 @@ ALTER TABLE `estadosProyecto`
 -- AUTO_INCREMENT de la tabla `facultad`
 --
 ALTER TABLE `facultad`
-  MODIFY `IdFacultad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo identificador de la facultad', AUTO_INCREMENT=6;
+  MODIFY `IdFacultad` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo identificador de la facultad', AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `formularios`
 --
 ALTER TABLE `formularios`
-  MODIFY `IdFormulario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdFormulario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `institucion`
 --
@@ -833,7 +852,7 @@ ALTER TABLE `perfil`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `IdPersona` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de identificacion de la persona o estudiante', AUTO_INCREMENT=6;
+  MODIFY `IdPersona` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Codigo de identificacion de la persona o estudiante', AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `proyecto`
 --
@@ -848,7 +867,7 @@ ALTER TABLE `universidad`
 -- AUTO_INCREMENT de la tabla `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -925,7 +944,6 @@ ALTER TABLE `perfildetalle`
 -- Filtros para la tabla `persona`
 --
 ALTER TABLE `persona`
-  ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`UserId`) REFERENCES `user_accounts` (`id`),
   ADD CONSTRAINT `persona_ibfk_2` FOREIGN KEY (`IdCarrera`) REFERENCES `carrera` (`IdCarrera`);
 
 --

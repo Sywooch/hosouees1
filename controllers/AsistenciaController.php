@@ -120,7 +120,7 @@ class AsistenciaController extends Controller
                 return [
                     'forceReload'=>'true',
                     'title'=> "Agregar nuevo registro",
-                    'content'=>'<span class="text-success">Create Asistencia success</span>',
+                    'content'=>'<span class="text-success">Asistencia creada exitosamente</span>',
                     'footer'=> Html::button('Cerrar',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Crear Mas',['create','idProyecto' => $idProyecto],['class'=>'btn btn-primary','role'=>'modal-remote'])
         

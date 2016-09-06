@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use \app\helpers\PersonaHelper;
 
 class SiteController extends Controller
 {
@@ -60,12 +61,21 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $persona = PersonaHelper::getPersona();
         if (Yii::$app->user->isGuest) 
         {
             $this->redirect('/user/security/login');
         }        
         else
         {
+             if($persona == FALSE)
+             {
+                 die('Su registro de usuario debe estar ligado aun registro de persona en el sistema, comuniquese con el administradors');
+             }
+             else
+             {
+                return $this->render('index'); 
+             }
 //            Yii::$app->mailer->compose()
 //                ->setFrom(\Yii::$app->params['adminEmail'])
 //                ->setTo('smokecastaneda@gmail.com')
@@ -73,8 +83,6 @@ class SiteController extends Controller
 //                ->setTextBody('Plain text content')
 //                ->setHtmlBody('<b>HTML content</b>')
 //                ->send();        
-            
-           return $this->render('index'); 
         }
         
     }

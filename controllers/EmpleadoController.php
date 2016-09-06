@@ -64,6 +64,7 @@ class EmpleadoController extends Controller
     public function actionCreate()
     {
         $model = new Persona();
+        $model->scenario = Persona::SCENARIO_EMPLEADO;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
@@ -98,6 +99,7 @@ class EmpleadoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Persona::SCENARIO_EMPLEADO;
         $oldFile = $model->getImageFile();
         $oldAvatar = $model->ArchivoAdjunto;
         $oldFileName = $model->NombreAdjunto;

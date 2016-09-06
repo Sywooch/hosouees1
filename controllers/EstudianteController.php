@@ -66,6 +66,8 @@ class EstudianteController extends Controller
     public function actionCreate()
     {
         $model = new Persona();
+        $model->scenario = Persona::SCENARIO_ESTUDIANTE;
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             // get the uploaded file instance. for multiple file uploads
             // the following data will return an array
@@ -100,6 +102,8 @@ class EstudianteController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = Persona::SCENARIO_ESTUDIANTE;
+        
         $oldFile = $model->getImageFile();
         $oldAvatar = $model->ArchivoAdjunto;
         $oldFileName = $model->NombreAdjunto;
@@ -260,5 +264,46 @@ class EstudianteController extends Controller
         // return the pdf output as per the destination setting
         return $pdf->render(); 
     }    
+    
+    public function actionReporteProyecto($idPersona, $idProyecto) {
+        $estudiante = Persona::findOne(['IdPersona' => $idPersona]);
+        $horas= $estudiante->getHoras()->where(['EstadoRegistro' => '1', 'IdProyecto' => $idProyecto])->one();
+        $p = $horas->idProyecto;        
+        // get your HTML raw content without any layouts or scripts
+        $content = $this->renderPartial('_reporte_proyecto',[
+            'estudiante' => $estudiante,
+            'idProyecto' => $idProyecto,
+            'horas' => $horas,
+            'p' => $p,
+        ]);
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_CORE, 
+            // Letter paper format
+            'format' => Pdf::FORMAT_LETTER, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_LANDSCAPE, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER, 
+            // your html content input
+            'content' => $content,  
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'Reporte de horas sociales de '.$estudiante->NombreCompleto],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetHeader'=>['Reporte de horas sociales de '.$estudiante->NombreCompleto.' en el proyecto '.$p->NombreProyecto.' al '.date('d-m-Y').Html::img('@web/img/logo.png', ['width'=>'25px', 'height' =>'25px', 'align'=>'center', 'class'=> ''])], 
+                'SetFooter'=>['Página {PAGENO}'],
+            ]
+        ]);
+
+        // return the pdf output as per the destination setting
+        return $pdf->render(); 
+    }        
     
 }

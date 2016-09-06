@@ -20,6 +20,10 @@ use app\helpers\CrudHelper;
                 'label'=> 'Facultad'
             ],            
             'Nombre',
+            [
+                'attribute'=>'CantidadHorasSociales',
+                'label'=> 'Cantidad horas sociales'
+            ],             
             'NombreCorto',
             [
                 'value' => CrudHelper::getEstadosRegistroLabel($model->EstadoRegistro),

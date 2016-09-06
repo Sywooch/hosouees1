@@ -61,7 +61,11 @@ use app\helpers\CrudHelper;
                     [
                         'label' => 'Cantidad de horas sociales por hora<br/> de asitencia',
                         'attribute'=> 'HorasSocialesXhora',
-                    ],    
+                    ],   
+                    [
+                        'label' => 'Asesor',
+                        'attribute'=> 'idPersonaAsesor.NombreCompleto',
+                    ],                     
                 ],
             ]) ?>
         </div>        

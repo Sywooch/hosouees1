@@ -51,7 +51,7 @@ class Role extends AuthItem {
     public function attributeLabels() {
         $labels = parent::attributeLabels();
         $labels['name'] = Yii::t('rbac', 'Role name');
-        $labels['permissions'] = Yii::t('rbac', 'Permissions');
+        $labels['permissions'] = Yii::t('rbac', 'Permisos');
         return $labels;
     }
 

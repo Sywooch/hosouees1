@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Html;
+use \app\helpers\PersonaHelper;
+$persona = PersonaHelper::getPersona();
+$verOpcionesEstudiante = ($persona->TipoPersona == 'ES' && $persona->Elegible == '1') || ($persona->TipoPersona != 'ES');
 ?>
 <aside class="main-sidebar">
 
@@ -28,10 +31,10 @@ use yii\helpers\Html;
                     ['label' => 'Misión, Visión y Valores', 'icon' => 'fa fa-bookmark fa-1x', 'url' => ['/site/info-general']],
                     ['label' => 'Parámetros', 'icon' => 'fa fa-gears fa-1x', 'url' => ['/configuracion'], 'visible' => Yii::$app->user->can('ConfigurarParametros')],
                     ['label' => 'Reporte de horas sociales', 'icon' => 'fa fa-file fa-1x', 'url' => ['/estudiante/generar-reporte'], 'visible' => Yii::$app->user->can('GenerarReporte')],
-                    ['label' => 'Proyectos abiertos', 'icon' => 'fa fa-flag fa-1x', 'url' => ['/proyecto/consulta'], 'visible' => Yii::$app->user->can('ConsultaProyectosAbiertos')],
+                    ['label' => 'Proyectos abiertos', 'icon' => 'fa fa-flag fa-1x', 'url' => ['/proyecto/consulta'], 'visible' => Yii::$app->user->can('ConsultaProyectosAbiertos') && $verOpcionesEstudiante],
                     ['label' => 'Proyectos asesorados', 'icon' => 'fa fa-users fa-1x', 'url' => ['/proyecto/consulta-asesor'], 'visible' => Yii::$app->user->can('ConsultaAsesor')],
-                    ['label' => 'Mis proyectos', 'icon' => 'fa fa-user fa-1x', 'url' => ['/proyecto/consulta-estudiante'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
-                    ['label' => 'Descarga de formularios', 'icon' => 'fa fa-file fa-1x', 'url' => ['/formularios/descarga'], 'visible' => Yii::$app->user->can('ConsultaEstudiante')],
+                    ['label' => 'Mis proyectos', 'icon' => 'fa fa-user fa-1x', 'url' => ['/proyecto/consulta-estudiante'], 'visible' => Yii::$app->user->can('ConsultaEstudiante') && $verOpcionesEstudiante],
+                    ['label' => 'Descarga de formularios', 'icon' => 'fa fa-file fa-1x', 'url' => ['/formularios/descarga'], 'visible' => Yii::$app->user->can('ConsultaEstudiante') && $verOpcionesEstudiante],
                     [
                         'label' => 'Usuarios y permisos',
                         'icon' => 'fa fa-user fa-1x',
@@ -51,7 +54,7 @@ use yii\helpers\Html;
                         'url' => '#',
                         'visible'=> Yii::$app->user->can('AdministrarCatalogos'),
                         'items' => [
-                            ['label' => 'Universidades', 'icon' => '', 'url' => ['/catalogs/universidad'], 'visible'=>\Yii::$app->user->can('MantoUniversidades')],
+//                            ['label' => 'Universidades', 'icon' => '', 'url' => ['/catalogs/universidad'], 'visible'=>\Yii::$app->user->can('MantoUniversidades')],
                             ['label' => 'Carreras', 'icon' => '', 'url' => ['/catalogs/carrera'], 'visible'=>\Yii::$app->user->can('MantoCarreras')],
                             ['label' => 'Facultades', 'icon' => '', 'url' => ['/catalogs/facultad'], 'visible'=>\Yii::$app->user->can('MantoFacultades')],
                             ['label' => 'Instituciones', 'icon' => '', 'url' => ['/catalogs/institucion'], 'visible'=>\Yii::$app->user->can('MantoInstituciones')],

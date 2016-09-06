@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
 use app\helpers\CrudHelper;
-
+use app\helpers\PersonaHelper;
+$persona = PersonaHelper::getPersona();
 /* @var $this yii\web\View */
 /* @var $model app\modules\catalogs\models\Persona */
 ?>
@@ -38,7 +39,11 @@ use app\helpers\CrudHelper;
                     <td>
                         <?= Html::img('@web/uploads/'.$p->ArchivoAdjunto, ['width'=>'100px', 'height' =>'100px', 'align'=>'center', 'class'=> 'img img-responsive img-thumbnail']);?>
                     </td>
-                    <td><?=$p->NombreProyecto;?></td>
+                    <td>
+                        <?=$p->NombreProyecto;?>
+                        <br/>
+                        <small><b>Asesor:</b> <?=$p->idPersonaAsesor->NombreCompleto?></small>
+                    </td>
                     <td><?=$h->HorasRealizadas;?></td>
                     <td>
                         <?php
@@ -55,7 +60,12 @@ use app\helpers\CrudHelper;
                         {
                             ?>
                             <tr>
-                                <td><?=$a->Fecha?></td>
+                                <td>
+                                    <?php
+                                    Yii::$app->formatter->locale = 'es';
+                                    echo Yii::$app->formatter->asDate($a->Fecha); // output: January 1, 2014
+                                    ?>
+                                </td>                                
                                 <td><?=$a->CantidadHoras?></td>
                                 <td><?=$a->Comentarios?></td>
                             </tr>
@@ -75,6 +85,20 @@ use app\helpers\CrudHelper;
                     <td></td>
                 </tr>
             </tfoot>
-        </table>        
+        </table>    
     </div>
+    <table style="width: 100%; text-align: center; margin-top: 50px">
+        <tr>
+            <td style="width: 50%">
+                __________________________
+                <br>
+                <?=$persona->NombreCompleto?> 
+            </td>
+            <td style="width: 50%">
+                __________________________
+                <br>
+                <?=$estudiante->NombreCompleto?> 
+            </td>
+        </tr>
+    </table>    
 </div>    

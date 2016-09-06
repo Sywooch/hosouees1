@@ -22,7 +22,7 @@ $permissions = $authManager->getPermissions();
     <?= $form->field($model, 'ruleName')->dropDownList($rulesDatas) ?>
 
     <div class="form-group field-role-permissions">
-        <label class="control-label" for="role-permissions">Permissions</label>
+        <label class="control-label" for="role-permissions">Permisos</label>
         <input type="hidden" name="Role[permissions]" value="">
         <div id="role-permissions">
             <table class="table table-bordered table-striped">
@@ -30,7 +30,7 @@ $permissions = $authManager->getPermissions();
                     <tr>
                         <td style="width:1px"></td>
                         <td style="width:1px"><b>Name</b></td>
-                        <td><b>Description</b></td>
+                        <td><b>Descripción</b></td>
                     </tr>
                 </thead>
                 <tbody>

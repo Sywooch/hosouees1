@@ -81,9 +81,9 @@ class UserAccounts extends BaseUserAccounts implements UserConfirmableInterface,
         $rules['usernameRequired'] = ['username', 'required'];
         $rules['usernamePattern'] = ['username', 'match', 'pattern' => '/^[-a-zA-Z0-9_\.@]+$/'];
         $rules['usernameLength'] = ['username', 'string', 'min' => 3, 'max' => 255];
-        $rules['usernameUnique'] = ['username', 'unique', 'message' => Yii::t('user', 'This username has already been taken')];
+        $rules['usernameUnique'] = ['username', 'unique', 'message' => Yii::t('user', 'Este nombre de usuario ya está en uso')];
 
-        $rules['loginUnique'] = ['login', 'unique', 'message' => Yii::t('user', 'This email has already been taken for other account')];
+        $rules['loginUnique'] = ['login', 'unique', 'message' => Yii::t('user', 'Este correo electrónico ya esta asignado a otra cuenta de usuario')];
         $rules['loginPattern'] = ['login', 'email'];
         return $rules;
     }

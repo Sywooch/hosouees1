@@ -11,14 +11,22 @@ $persona = PersonaHelper::getPersona();
 ?>
 <div class="site-index">
     <?php 
-    if($persona->Elegible == '0' && $persona->TipoPersona == 'ES')
+    if($persona != FALSE)
     {
-        echo $configuracion->TextoBienvenidaNoElegible;
+        if($persona->Elegible == '0' && $persona->TipoPersona == 'ES')
+        {
+            echo $configuracion->TextoBienvenidaNoElegible;
+        }
+        else
+        {
+            echo $configuracion->TextoBienvenida;
+        }        
     }
     else
     {
         echo $configuracion->TextoBienvenida;
     }
+   
     ?>
 </div>
 <script>

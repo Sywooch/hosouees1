@@ -40,7 +40,8 @@ use app\models\Comunicacion;
 class Persona extends \yii\db\ActiveRecord
 {
     public $image;
-    
+    const SCENARIO_ESTUDIANTE = 'estudiante';
+    const SCENARIO_EMPLEADO = 'empleado';    
     /**
      * @inheritdoc
      */
@@ -48,6 +49,14 @@ class Persona extends \yii\db\ActiveRecord
     {
         return 'persona';
     }
+    
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_ESTUDIANTE];
+        $scenarios[self::SCENARIO_EMPLEADO];
+        return $scenarios;
+    }       
 
     /**
      * @inheritdoc
@@ -58,6 +67,8 @@ class Persona extends \yii\db\ActiveRecord
             [['image'], 'safe'],
             [['image'], 'file', 'extensions'=>'jpg, gif, png'],              
             [['Nombres', 'Apellidos', 'Sexo'], 'required'],
+            [['IdCarrera', 'CarnetEstudiante'], 'required', 'on' => self::SCENARIO_ESTUDIANTE],
+            [['CarnetEmpleado'], 'required', 'on' => self::SCENARIO_EMPLEADO],
             [['UserId', 'IdCarrera'], 'integer'],
             [['Nombres', 'Apellidos', 'CarnetEstudiante', 'CarnetEmpleado'], 'string', 'max' => 100],
             [['DUI'], 'string', 'max' => 10],
@@ -94,7 +105,7 @@ class Persona extends \yii\db\ActiveRecord
             'Cargo' => Yii::t('app', 'Cargo'),
             'UserId' => Yii::t('app', 'Usuario'),
             'TipoPersona' => Yii::t('app', 'Tipo Persona'),
-            'IdCarrera' => Yii::t('app', 'Id Carrera'),
+            'IdCarrera' => Yii::t('app', 'Carrera'),
             'ArchivoAdjunto' => Yii::t('app', 'Archivo Adjunto'),
             'NombreAdjunto' => Yii::t('app', 'Nombre Adjunto'),
             'EstadoRegistro' => Yii::t('app', 'Estado Registro'),
